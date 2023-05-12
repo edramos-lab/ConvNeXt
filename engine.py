@@ -10,7 +10,7 @@ import math
 from typing import Iterable, Optional
 import torch
 from timm.data import Mixup
-from timm.utils import accuracy, ModelEma
+from timm.utils import accuracy, ModelEma,precision_score, recall_score
 
 import utils
 
@@ -139,7 +139,7 @@ def evaluate(data_loader, model, device, use_amp=False):
     criterion = torch.nn.CrossEntropyLoss()
 
     metric_logger = utils.MetricLogger(delimiter="  ")
-    header = 'Test:'
+    header = 'Valid:'
 
     # switch to evaluation mode
     model.eval()
@@ -160,6 +160,7 @@ def evaluate(data_loader, model, device, use_amp=False):
             loss = criterion(output, target)
 
         acc1, acc5 = accuracy(output, target, topk=(1, 5))
+        
 
         batch_size = images.shape[0]
         metric_logger.update(loss=loss.item())
