@@ -10,7 +10,7 @@ import math
 from typing import Iterable, Optional
 import torch
 from timm.data import Mixup
-from timm.utils import accuracy, ModelEma,precision_score, recall_score
+from timm.utils import accuracy, ModelEma
 
 import utils
 
